@@ -1,6 +1,6 @@
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-
-import { viewports as breakpoints } from '../src/styles/breakpoints'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { globalDecorators } from './.decorators';
+import { viewports as breakpoints } from '../src/styles/breakpoints';
 
 // Create custom viewports using widths defined in design tokens
 const breakpointViewports = Object.keys(breakpoints).reduce((acc, key) => {
@@ -12,9 +12,9 @@ const breakpointViewports = Object.keys(breakpoints).reduce((acc, key) => {
       height: 'calc(100% - 20px)',
     },
     type: 'other',
-  }
-  return acc
-}, {} as typeof INITIAL_VIEWPORTS)
+  };
+  return acc;
+}, {} as typeof INITIAL_VIEWPORTS);
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -30,4 +30,6 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
+
+export const decorators = globalDecorators;
