@@ -6,7 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider as StoreProvider } from 'react-redux';
 import { rootReducer } from '../src/app-state';
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import { withDesign } from 'storybook-addon-designs';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 
@@ -15,11 +15,23 @@ import { lightTheme, darkTheme } from '../src/styles/theme';
 
 initialize();
 
-const withRouter: DecoratorFn = (StoryFn) => {
+const withRouter: DecoratorFn = (StoryFn, { parameters: { deeplink } }) => {
+  if (!deeplink) {
+    return (
+      <BrowserRouter>
+        <StoryFn />
+      </BrowserRouter>
+    );
+  }
+  // path: "/restaurants/:id"
+  // route: "/restaurants/1"
+  const { path, route } = deeplink;
   return (
-    <BrowserRouter>
-      <StoryFn />
-    </BrowserRouter>
+    <MemoryRouter initialEntries={[encodeURI(route)]}>
+      <Routes>
+        <Route path={path} element={<StoryFn />} />
+      </Routes>
+    </MemoryRouter>
   );
 };
 
