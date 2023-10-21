@@ -2,6 +2,10 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { DecoratorFn } from '@storybook/react';
 
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider as StoreProvider } from 'react-redux';
+import { rootReducer } from '../src/app-state';
+
 import { BrowserRouter } from 'react-router-dom';
 import { withDesign } from 'storybook-addon-designs';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
@@ -18,6 +22,19 @@ const withRouter: DecoratorFn = (StoryFn) => {
     </BrowserRouter>
   );
 };
+
+const withStore: DecoratorFn = (StoryFn, { parameters }) => {
+  const store = configureStore({
+    reducer: rootReducer,
+    preloadedState: parameters.store?.initialState,
+  });
+  return (
+    <StoreProvider store={store}>
+      <StoryFn />
+    </StoreProvider>
+  );
+};
+
 const withTheme: DecoratorFn = (StoryFn, context) => {
   const theme = context.parameters.theme ?? context.globals.theme;
   const storyTheme = theme === 'dark' ? darkTheme : lightTheme;
@@ -30,4 +47,4 @@ const withTheme: DecoratorFn = (StoryFn, context) => {
   );
 };
 
-export const globalDecorators = [mswDecorator, withTheme, withDesign, withRouter];
+export const globalDecorators = [mswDecorator, withTheme, withDesign, withRouter, withStore];
