@@ -1,6 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { RestaurantsSection } from './RestaurantsSection';
+import { restaurants } from '../../../../stub/restaurants';
+
+import { RestaurantsSectionComponent as RestaurantsSection } from './RestaurantsSection.container';
 
 export default {
   title: 'Pages/HomePage/Components/RestaurantsSection',
@@ -20,4 +22,11 @@ const Template: ComponentStory<typeof RestaurantsSection> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   title: 'Our favourites',
+  restaurants: restaurants,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  title: 'Our favourites',
+  isLoading: true,
 };
