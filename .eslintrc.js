@@ -22,7 +22,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'import/no-anonymous-default-export': 'off',
-    'prettier/prettier': 'warn',
+    'prettier/prettier': 'off',
     'import/order': ['warn', { 'newlines-between': 'always' }],
     '@typescript-eslint/no-use-before-define': 'off',
     'react/jsx-uses-react': 'off',
