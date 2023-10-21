@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { DecoratorFn } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
 
 import { GlobalStyle } from '../src/styles/GlobalStyle';
 import { lightTheme, darkTheme } from '../src/styles/theme';
@@ -17,4 +18,4 @@ const withTheme: DecoratorFn = (StoryFn, context) => {
   );
 };
 
-export const globalDecorators = [withTheme];
+export const globalDecorators = [withTheme, withDesign];
