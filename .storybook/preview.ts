@@ -2,6 +2,10 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { globalDecorators } from './.decorators';
 import { viewports as breakpoints } from '../src/styles/breakpoints';
 
+import { initialize, mswLoader } from 'msw-storybook-addon';
+
+initialize();
+
 // Create custom viewports using widths defined in design tokens
 const breakpointViewports = Object.keys(breakpoints).reduce((acc, key) => {
   acc[`breakpoint${key}`] = {
@@ -15,22 +19,6 @@ const breakpointViewports = Object.keys(breakpoints).reduce((acc, key) => {
   };
   return acc;
 }, {} as typeof INITIAL_VIEWPORTS);
-
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  viewport: {
-    viewports: {
-      ...breakpointViewports,
-      ...INITIAL_VIEWPORTS,
-    },
-  },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-};
 
 export const decorators = globalDecorators;
 
@@ -48,3 +36,25 @@ export const globalTypes = {
     },
   },
 };
+
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    viewport: {
+      viewports: {
+        ...breakpointViewports,
+        ...INITIAL_VIEWPORTS,
+      },
+    },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+  },
+  // Provide the MSW addon loader globally
+  loaders: [mswLoader],
+};
+
+export default preview;

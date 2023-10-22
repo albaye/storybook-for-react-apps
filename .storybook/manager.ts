@@ -1,6 +1,6 @@
-import { addons } from '@storybook/addons'
-import { create } from '@storybook/theming/create'
-import logo from '../src/assets/images/logo-black.svg'
+import { addons } from '@storybook/addons';
+import { create } from '@storybook/theming/create';
+import logo from '../src/assets/images/logo-black.svg';
 
 const theme = create({
   base: 'light',
@@ -38,10 +38,10 @@ const theme = create({
   brandTitle: 'Mealdrop',
   brandUrl: 'https://github.com/yannbf/storybook-for-react-apps/',
   brandImage: logo,
-})
+});
 
 addons.setConfig({
   theme,
   showPanel: true, // show addons panel by default
   panelPosition: 'right', // position addons panel on the right by default
-})
+});

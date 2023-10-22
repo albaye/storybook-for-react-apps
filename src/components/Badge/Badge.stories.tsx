@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Badge } from './Badge';
 
@@ -14,13 +14,16 @@ export default {
       url: 'https://www.figma.com/file/3Q1HTCalD0lJnNvcMoEw1x/Mealdrop?type=design&node-id=1906-3469&mode=design&t=gctJq2mbEVLsCjky-4',
     },
   },
-} as ComponentMeta<typeof Badge>;
+} as Meta<typeof Badge>;
 
-const Template: ComponentStory<typeof Badge> = (args) => <Badge {...args} />;
+type Story = StoryObj<typeof Badge>;
+export const Default: Story = {
+  render: (args) => <Badge {...args} />,
+};
 
-export const Default = Template.bind({});
-
-export const DarkTheme = Template.bind({});
-DarkTheme.parameters = {
-  theme: 'dark',
+export const DarkTheme: Story = {
+  render: (args) => <Badge {...args} />,
+  parameters: {
+    theme: 'dark',
+  },
 };

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { cartItems } from 'stub/cart-items';
 
 import { PageTemplate } from './PageTemplate';
@@ -9,49 +9,53 @@ export default {
   parameters: {
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof PageTemplate>;
+} as Meta<typeof PageTemplate>;
 
 // Just to make the story a bit more undrestandable for the users
 const DummyComponent: React.FC = ({ children }) => <div style={{ padding: 60 }}>{children}</div>;
 
-const Template: ComponentStory<typeof PageTemplate> = (args) => <PageTemplate {...args} />;
+type Story = StoryObj<typeof PageTemplate>;
 
-export const Default = Template.bind({});
-Default.args = {
-  children: (
-    <DummyComponent>
-      Default template with scrollable header and navigation items + Footer
-    </DummyComponent>
-  ),
+export const Default: Story = {
+  args: {
+    children: (
+      <DummyComponent>
+        Default template with scrollable header and navigation items + Footer
+      </DummyComponent>
+    ),
+  },
 };
 
-export const WithItemsInTheCart = Template.bind({});
-WithItemsInTheCart.parameters = {
-  store: {
-    initialState: {
-      cart: {
-        items: cartItems,
+export const WithItemsInTheCart: Story = {
+  parameters: {
+    store: {
+      initialState: {
+        cart: {
+          items: cartItems,
+        },
       },
     },
   },
 };
 
-export const StickyHeader = Template.bind({});
-StickyHeader.args = {
-  type: 'sticky-header',
-  children: (
-    <DummyComponent>
-      Template with sticky header on desktop and navigation items. Try scrolling!
-    </DummyComponent>
-  ),
+export const StickyHeader: Story = {
+  args: {
+    type: 'sticky-header',
+    children: (
+      <DummyComponent>
+        Template with sticky header on desktop and navigation items. Try scrolling!
+      </DummyComponent>
+    ),
+  },
 };
 
-export const Basic = Template.bind({});
-Basic.args = {
-  type: 'basic',
-  children: (
-    <DummyComponent>
-      Simple template with scrollable header and no navigation items and no footer
-    </DummyComponent>
-  ),
+export const Basic: Story = {
+  args: {
+    type: 'basic',
+    children: (
+      <DummyComponent>
+        Simple template with scrollable header and no navigation items and no footer
+      </DummyComponent>
+    ),
+  },
 };

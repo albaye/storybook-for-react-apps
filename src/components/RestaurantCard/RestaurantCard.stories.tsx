@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { restaurants } from '../../stub/restaurants';
 
@@ -16,23 +16,26 @@ export default {
   args: {
     ...restaurants[0],
   },
-} as ComponentMeta<typeof RestaurantCard>;
+} as Meta<typeof RestaurantCard>;
 
-const Template: ComponentStory<typeof RestaurantCard> = (args) => <RestaurantCard {...args} />;
+type Story = StoryObj<typeof RestaurantCard>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};
 
-export const New = Template.bind({});
-New.args = {
-  isNew: true,
+export const New: Story = {
+  args: {
+    isNew: true,
+  },
 };
 
-export const Closed = Template.bind({});
-Closed.args = {
-  isClosed: true,
+export const Closed: Story = {
+  args: {
+    isClosed: true,
+  },
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
-  isLoading: true,
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+  },
 };

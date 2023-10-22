@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Review } from './Review';
 
@@ -15,28 +15,29 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Review>;
+} as Meta<typeof Review>;
 
-const Template: ComponentStory<typeof Review> = (args) => <Review {...args} />;
+type Story = StoryObj<typeof Review>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};
 
-export const Excellent = Template.bind({});
-Excellent.args = {
-  rating: 5,
+export const Excellent: Story = {
+  args: {
+    rating: 5,
+  },
 };
-
-export const VeryGood = Template.bind({});
-VeryGood.args = {
-  rating: 4.3,
+export const VeryGood: Story = {
+  args: {
+    rating: 4.3,
+  },
 };
-
-export const Adequate = Template.bind({});
-Adequate.args = {
-  rating: 2.5,
+export const Adequate: Story = {
+  args: {
+    rating: 2.5,
+  },
 };
-
-export const VeryPoor = Template.bind({});
-VeryPoor.args = {
-  rating: 1,
+export const VeryPoor: Story = {
+  args: {
+    rating: 1,
+  },
 };

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { rest } from 'msw';
 import { BASE_URL } from 'api';
 import { restaurants } from 'stub/restaurants';
@@ -14,30 +14,27 @@ export default {
       url: 'https://www.figma.com/file/3Q1HTCalD0lJnNvcMoEw1x/Mealdrop?type=design&node-id=135-311&mode=design&t=APKbQdxjJU5XhrUV-4',
     },
   },
-} as ComponentMeta<typeof RestaurantsSection>;
+} as Meta<typeof RestaurantsSection>;
 
-const Template: ComponentStory<typeof RestaurantsSection> = (args) => (
-  <RestaurantsSection {...args} />
-);
+type Story = StoryObj<typeof RestaurantsSection>;
 
-export const Default = Template.bind({});
-Default.args = {
-  title: 'Our favourites',
-};
-
-Default.parameters = {
-  msw: {
-    handlers: [rest.get(BASE_URL, (req, res, ctx) => res(ctx.json(restaurants)))],
+export const Default: Story = {
+  args: {
+    title: 'Our favourites',
+  },
+  parameters: {
+    msw: {
+      handlers: [rest.get(BASE_URL, (req, res, ctx) => res(ctx.json(restaurants)))],
+    },
   },
 };
-
-export const Loading = Template.bind({});
-Loading.args = {
-  ...Default.args,
-};
-
-Loading.parameters = {
-  msw: {
-    handlers: [rest.get(BASE_URL, (req, res, ctx) => res(ctx.delay('infinite')))],
+export const Loading: Story = {
+  args: {
+    ...Default.args,
+  },
+  parameters: {
+    msw: {
+      handlers: [rest.get(BASE_URL, (req, res, ctx) => res(ctx.delay('infinite')))],
+    },
   },
 };

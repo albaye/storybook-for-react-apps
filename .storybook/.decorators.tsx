@@ -7,13 +7,9 @@ import { Provider as StoreProvider } from 'react-redux';
 import { rootReducer } from '../src/app-state';
 
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
-import { withDesign } from 'storybook-addon-designs';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
 
 import { GlobalStyle } from '../src/styles/GlobalStyle';
 import { lightTheme, darkTheme } from '../src/styles/theme';
-
-initialize();
 
 const withRouter: DecoratorFn = (StoryFn, { parameters: { deeplink } }) => {
   if (!deeplink) {
@@ -59,4 +55,4 @@ const withTheme: DecoratorFn = (StoryFn, context) => {
   );
 };
 
-export const globalDecorators = [mswDecorator, withTheme, withDesign, withRouter, withStore];
+export const globalDecorators = [withTheme, withRouter, withStore];
