@@ -12,6 +12,7 @@ const config: StorybookConfig = {
     '@storybook/preset-create-react-app',
     '@storybook/addon-mdx-gfm',
     '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
   ],
 
   staticDirs: ['../public'],
