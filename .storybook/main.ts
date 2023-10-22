@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/preset-create-react-app',
     '@storybook/addon-mdx-gfm',
+    '@storybook/addon-interactions',
   ],
 
   staticDirs: ['../public'],

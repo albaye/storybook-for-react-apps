@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { rest } from 'msw';
 import { BASE_URL } from 'api';
 import { restaurants } from 'stub/restaurants';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 import { RestaurantDetailPage } from './RestaurantDetailPage';
 
@@ -41,6 +43,16 @@ export const Success: Story = {
         handlers: [rest.get(BASE_URL, (req, res, ctx) => res(ctx.json(restaurants)))],
       },
     },
+  },
+};
+
+export const WithModalOpen: Story = {
+  parameters: { ...Success.parameters },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const foodItem = await canvas.findByText(/Cheeseburger/i);
+    await userEvent.click(foodItem);
+    await expect(canvas.getByTestId('modal')).toBeInTheDocument();
   },
 };
 
